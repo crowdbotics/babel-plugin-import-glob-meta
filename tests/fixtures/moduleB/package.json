@@ -1,0 +1,11 @@
+{
+  "name": "@modules/moduleB",
+  "description": "description",
+  "version": "1.0.0",
+  "author": "Crowdbotics",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
