@@ -7,12 +7,12 @@ function loadFixture() {
   const fixture = path.join(__dirname, "fixtures", "index.js");
   return {
     content: fs.readFileSync(fixture, 'utf8'),
-    path: fixture
+    filename: fixture
   }
 }
 
 it('converts named glob imports', () => {
-  const { content } = loadFixture();
-  const { code } = babel.transform(content, { plugins: [plugin] });
+  const { content, filename } = loadFixture();
+  const { code } = babel.transform(content, { plugins: [plugin], filename });
   expect(code).toMatchSnapshot();
 });
