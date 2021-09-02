@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`converts named glob imports 1`] = `
+"
+import _ig1 from \\"./moduleA/index.js\\";"
+import _ig2 from \\"./moduleB/index.js\\";"
+
+let modules = {
+  "_metadata": {},
+  "@modules/moduleA": {},
+  "@modules/moduleB": {},
+};
+`;
