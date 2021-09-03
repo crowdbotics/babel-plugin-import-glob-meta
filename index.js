@@ -75,6 +75,18 @@ module.exports = function importGlobMetaPlugin(babel) {
           }
         )
 
+        // Return let modules = [] on no matches
+        if (!files) {
+          path.replaceWith(
+            t.variableDeclaration("let", [
+              t.variableDeclarator(
+                t.identifier(specifiers[0].local.name), t.arrayExpression([])
+              )
+            ])
+          )
+          return
+        }
+
         // Ignore the current file itself
         const removeCurrent = item => {
           return item != currentFilePath

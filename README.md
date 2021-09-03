@@ -41,30 +41,39 @@ The first import example will be converted into something like this:
 
 ```javascript
 import _ig from "./moduleA/index.js";
-import _ig2 from "./moduleB/index.js";
+import _ig2 from "./module-B/index.js";
 
 let modules = [
   {
-    name: "@modules/moduleA",
+    name: "moduleA",
     value: _ig,
     path: "./moduleA/index.js",
+    package: "@modules/moduleA",
   },
   {
-    name: "@modules/moduleB",
+    name: "moduleB",
     value: _ig2,
-    path: "./moduleB/index.js",
+    path: "./module-B/index.js",
+    package: "@modules/module-B",
   },
 ];
 ```
 
 Each object in `modules` is made of the following object properties:
 
-- `name` - Sibling - relative to the glob pattern - `package.json` `name` property.
+- `name` - [identifierfy](https://github.com/novemberborn/identifierfy)'d name of the parent directory of the file.
 - `value` - Reference of the placeholder specifier used in the import.
 - `path` - Relative - to the file where the import is made - path of the matched file.
+- `path` - Sibling - relative to the glob pattern - `package.json` `name` property.
 
 ## Errors
 
 Whenever a named import or multiple imports are found the following code frame error is thrown:
 
 > 'Can only import the default export from a glob pattern'
+
+If there's no pattern matches the import is replaced by:
+
+```javascript
+let modules = [];
+```

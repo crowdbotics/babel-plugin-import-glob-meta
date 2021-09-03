@@ -22,3 +22,9 @@ it('throws error on named glob imports', () => {
   expect(() => babel.transform(content, { plugins: [plugin], filename }))
     .toThrow('Can only import the default export from a glob pattern');
 });
+
+it('returns empty array on zero matches', () => {
+  const { content, filename } = loadFixture("index.empty.js");
+  const { code } = babel.transform(content, { plugins: [plugin], filename });
+  expect(code).toMatchSnapshot();
+});

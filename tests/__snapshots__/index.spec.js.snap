@@ -7,7 +7,7 @@ let modules = [{
   \\"name\\": \\"moduleB\\",
   \\"value\\": _ig,
   \\"path\\": \\"./module-B/index.js\\",
-  \\"package\\": \\"@modules/moduleB\\"
+  \\"package\\": \\"@modules/module-B\\"
 }, {
   \\"name\\": \\"moduleA\\",
   \\"value\\": _ig2,
@@ -20,7 +20,7 @@ let options = [{
   \\"name\\": \\"moduleB\\",
   \\"value\\": _ig3,
   \\"path\\": \\"./module-B/options.js\\",
-  \\"package\\": \\"@modules/moduleB\\"
+  \\"package\\": \\"@modules/module-B\\"
 }, {
   \\"name\\": \\"moduleA\\",
   \\"value\\": _ig4,
@@ -28,3 +28,5 @@ let options = [{
   \\"package\\": \\"@modules/moduleA\\"
 }];"
 `;
+
+exports[`returns empty array on zero matches 1`] = `"let modules = [];"`;
