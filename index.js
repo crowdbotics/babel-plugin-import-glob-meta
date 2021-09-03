@@ -37,13 +37,13 @@ module.exports = function importGlobMetaPlugin(babel) {
         const currentFilePath = state.file.opts.filename
         const baseDir = Path.resolve(Path.dirname(currentFilePath))
 
-        assertImportDefaultSpecifier(path, specifiers)
-
         // If this is not a local import, don't do anything
         if (importPath[0] !== '.' && importPath[0] !== '/') return
 
         // If the import specifier doesn't contain a glob pattern, don't do anything
         if (!isGlob(importPath)) return
+
+        assertImportDefaultSpecifier(path, specifiers)
 
         // Find file matches based on the glob pattern
         let files = glob.sync(
