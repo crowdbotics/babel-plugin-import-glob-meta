@@ -2,6 +2,7 @@ const glob = require('glob');
 const isGlob = require('is-glob');
 const Path = require('path');
 const fs = require('fs');
+const identifierfy = require('identifierfy');
 
 /* Checks the type of the import specifiers. Throws an error if any specifier isn't a default specifier. */
 function assertImportDefaultSpecifier(path, specifiers) {
@@ -23,6 +24,25 @@ function assertImportDefaultSpecifier(path, specifiers) {
 function readPackageName(index) {
   let pkg = fs.readFileSync(Path.join(Path.dirname(index), "package.json"), 'utf8');
   return JSON.parse(pkg).name;
+}
+
+// From novemberborn/babel-plugin-import-glob
+function memberify(subpath) {
+  const pieces = subpath.split(Path.sep)
+  const prefixReservedWords = pieces.length === 1
+  const ids = []
+  for (let index = 0; index < pieces.length; index++) {
+    const name = pieces[index]
+    const id = identifierfy(name, {
+      prefixReservedWords,
+      prefixInvalidIdentifiers: index === 0
+    })
+    if (id === null) {
+      return null
+    }
+    ids.push(id)
+  }
+  return ids.join('$')
 }
 
 module.exports = function importGlobMetaPlugin(babel) {
@@ -84,11 +104,12 @@ module.exports = function importGlobMetaPlugin(babel) {
 
         let dict = []
         files.map(file => {
-          let name = readPackageName(Path.resolve(baseDir, file));
+          const name = memberify(Path.basename(Path.dirname(file)))
+          const pakage = readPackageName(Path.resolve(baseDir, file));
           // Generate an unique placeholder for the import specifier name
           const placeholder = path.scope.generateUid('_ig')
           dict.push({
-            name, file, placeholder
+            name, file, placeholder, pakage
           })
         })
 
@@ -103,7 +124,7 @@ module.exports = function importGlobMetaPlugin(babel) {
               t.stringLiteral(item.file)
             )
           )
-          // Add an object with name, value and path of the imported object
+          // Add an object with name, value, path and package of the imported object
           assignRemappings.push(
             t.objectExpression(
               [
@@ -115,7 +136,10 @@ module.exports = function importGlobMetaPlugin(babel) {
                 ),
                 t.objectProperty(
                   t.stringLiteral("path"), t.stringLiteral(item.file)
-                )
+                ),
+                t.objectProperty(
+                  t.stringLiteral("package"), t.stringLiteral(item.pakage)
+                ),
               ]
             )
           )

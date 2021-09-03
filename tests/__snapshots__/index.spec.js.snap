@@ -1,26 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`converts default glob imports 1`] = `
-"import _ig from \\"./moduleA/index.js\\";
-import _ig2 from \\"./moduleB/index.js\\";
+"import _ig from \\"./module-B/index.js\\";
+import _ig2 from \\"./moduleA/index.js\\";
 let modules = [{
-  \\"name\\": \\"@modules/moduleA\\",
+  \\"name\\": \\"moduleB\\",
   \\"value\\": _ig,
-  \\"path\\": \\"./moduleA/index.js\\"
+  \\"path\\": \\"./module-B/index.js\\",
+  \\"package\\": \\"@modules/moduleB\\"
 }, {
-  \\"name\\": \\"@modules/moduleB\\",
+  \\"name\\": \\"moduleA\\",
   \\"value\\": _ig2,
-  \\"path\\": \\"./moduleB/index.js\\"
+  \\"path\\": \\"./moduleA/index.js\\",
+  \\"package\\": \\"@modules/moduleA\\"
 }];
-import _ig3 from \\"./moduleA/options.js\\";
-import _ig4 from \\"./moduleB/options.js\\";
+import _ig3 from \\"./module-B/options.js\\";
+import _ig4 from \\"./moduleA/options.js\\";
 let options = [{
-  \\"name\\": \\"@modules/moduleA\\",
+  \\"name\\": \\"moduleB\\",
   \\"value\\": _ig3,
-  \\"path\\": \\"./moduleA/options.js\\"
+  \\"path\\": \\"./module-B/options.js\\",
+  \\"package\\": \\"@modules/moduleB\\"
 }, {
-  \\"name\\": \\"@modules/moduleB\\",
+  \\"name\\": \\"moduleA\\",
   \\"value\\": _ig4,
-  \\"path\\": \\"./moduleB/options.js\\"
+  \\"path\\": \\"./moduleA/options.js\\",
+  \\"package\\": \\"@modules/moduleA\\"
 }];"
 `;
