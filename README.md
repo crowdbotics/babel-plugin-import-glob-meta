@@ -2,6 +2,11 @@
 
 A babel plugin that converts imports with glob patterns to multiple imports of the matches found and adds metadata about those matches, including fetching a package.json `name` property.
 
+Based on the ideas from:
+
+- https://github.com/novemberborn/babel-plugin-import-glob
+- https://github.com/jescalan/babel-plugin-import-glob-array
+
 ## Getting Started
 
 Install with npm:
