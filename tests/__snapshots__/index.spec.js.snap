@@ -1,13 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`converts named glob imports 1`] = `
-"
-import _ig1 from \\"./moduleA/index.js\\";"
-import _ig2 from \\"./moduleB/index.js\\";"
-
-let modules = {
-  "_metadata": {},
-  "@modules/moduleA": {},
-  "@modules/moduleB": {},
-};
+exports[`converts default glob imports 1`] = `
+"import _ig from \\"./moduleA/index.js\\";
+import _ig2 from \\"./moduleB/index.js\\";
+let modules = [{
+  \\"name\\": \\"@modules/moduleA\\",
+  \\"value\\": _ig,
+  \\"path\\": \\"./moduleA/index.js\\"
+}, {
+  \\"name\\": \\"@modules/moduleB\\",
+  \\"value\\": _ig2,
+  \\"path\\": \\"./moduleB/index.js\\"
+}];
+import _ig3 from \\"./moduleA/options.js\\";
+import _ig4 from \\"./moduleB/options.js\\";
+let options = [{
+  \\"name\\": \\"@modules/moduleA\\",
+  \\"value\\": _ig3,
+  \\"path\\": \\"./moduleA/options.js\\"
+}, {
+  \\"name\\": \\"@modules/moduleB\\",
+  \\"value\\": _ig4,
+  \\"path\\": \\"./moduleB/options.js\\"
+}];"
 `;
