@@ -64,7 +64,7 @@ Each object in `modules` is made of the following object properties:
 - `name` - [identifierfy](https://github.com/novemberborn/identifierfy)'d name of the parent directory of the file.
 - `value` - Reference of the placeholder specifier used in the import.
 - `path` - Relative - to the file where the import is made - path of the matched file.
-- `path` - Sibling - relative to the glob pattern - `package.json` `name` property.
+- `package` - Sibling - relative to the glob pattern - `package.json` `name` property.
 
 ## Errors
 
