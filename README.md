@@ -28,13 +28,13 @@ This plugin uses [is-glob](https://www.npmjs.com/package/is-glob) and [glob](htt
 It only supports default imports with a single specifier:
 
 ```javascript
-import modules from "./**";
+import modules from "./*";
 ```
 
 The pattern above is resolved into `index.js` matches, but one can also specify the filename after the glob marker:
 
 ```javascript
-import options from "./**/options.js";
+import options from "./*/options.js";
 ```
 
 The first import example will be converted into something like this:
