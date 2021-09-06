@@ -49,7 +49,7 @@ function memberify(subpath) {
   return ids.join('$')
 }
 
-function generateNameForImport(file) {
+function generateNameForImport(file, baseDir) {
   const name = memberify(Path.basename(Path.dirname(file)))
   const pakage = readPackageName(Path.resolve(baseDir, file));
 
@@ -138,7 +138,7 @@ module.exports = function importGlobMetaPlugin(babel) {
 
         let dict = []
         files.map(file => {
-          const { name, pakage } = generateNameForImport(file)
+          const { name, pakage } = generateNameForImport(file, baseDir)
           // Generate an unique placeholder for the import specifier name
           const placeholder = path.scope.generateUid('_ig')
           dict.push({
