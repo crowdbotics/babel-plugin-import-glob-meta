@@ -18,7 +18,7 @@ npm install babel-plugin-import-glob-meta --save-dev
 And add it to the babel config as a plugin:
 
 ```javascript
-plugins: ['import-glob-meta]
+plugins: ["import-glob-meta"];
 ```
 
 ## Usage
