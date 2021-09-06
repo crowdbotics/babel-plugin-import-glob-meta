@@ -86,7 +86,7 @@ module.exports = function importGlobMetaPlugin(babel) {
         let files = glob.sync(
           Path.join(baseDir, importPath),
           {
-            cwd: currentFilePath,
+            cwd: baseDir,
             nodir: true,
             strict: true
           }
