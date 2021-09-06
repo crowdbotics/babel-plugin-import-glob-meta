@@ -22,7 +22,11 @@ function assertImportDefaultSpecifier(path, specifiers) {
 
 /* Read a sibling package.json file and return the name property from it. */
 function readPackageName(index) {
-  let pkg = fs.readFileSync(Path.join(Path.dirname(index), "package.json"), 'utf8');
+  let pkgPath = Path.join(Path.dirname(index), "package.json")
+  if (!fs.exists(pkgPath)) {
+    return
+  }
+  let pkg = fs.readFileSync(pkgPath, 'utf8');
   return JSON.parse(pkg).name;
 }
 
@@ -43,6 +47,19 @@ function memberify(subpath) {
     ids.push(id)
   }
   return ids.join('$')
+}
+
+function generateNameForImport(file) {
+  const name = memberify(Path.basename(Path.dirname(file)))
+  const pakage = readPackageName(Path.resolve(baseDir, file));
+
+  if (!pakage) {
+    pakage = name
+  }
+
+  return {
+    name, pakage
+  }
 }
 
 module.exports = function importGlobMetaPlugin(babel) {
@@ -103,7 +120,12 @@ module.exports = function importGlobMetaPlugin(babel) {
           }
         }
 
-        files = files.filter(removeCurrent).filter(onlyIndex)
+        const noDeepSearch = item => {
+          let depth = Path.relative(baseDir, item).split(Path.sep).length;
+          return depth == 2
+        }
+
+        files = files.filter(removeCurrent).filter(onlyIndex).filter(noDeepSearch);
 
         // Compute relative paths
         files = files.map(file => {
@@ -116,8 +138,7 @@ module.exports = function importGlobMetaPlugin(babel) {
 
         let dict = []
         files.map(file => {
-          const name = memberify(Path.basename(Path.dirname(file)))
-          const pakage = readPackageName(Path.resolve(baseDir, file));
+          const { name, pakage } = generateNameForImport(file)
           // Generate an unique placeholder for the import specifier name
           const placeholder = path.scope.generateUid('_ig')
           dict.push({
