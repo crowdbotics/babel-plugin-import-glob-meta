@@ -23,7 +23,7 @@ function assertImportDefaultSpecifier(path, specifiers) {
 /* Read a sibling package.json file and return the name property from it. */
 function readPackageName(index) {
   let pkgPath = Path.join(Path.dirname(index), "package.json")
-  if (!fs.exists(pkgPath)) {
+  if (!fs.existsSync(pkgPath)) {
     return
   }
   let pkg = fs.readFileSync(pkgPath, 'utf8');
