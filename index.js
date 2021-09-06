@@ -51,7 +51,7 @@ function memberify(subpath) {
 
 function generateNameForImport(file, baseDir) {
   const name = memberify(Path.basename(Path.dirname(file)))
-  const pakage = readPackageName(Path.resolve(baseDir, file));
+  let pakage = readPackageName(Path.resolve(baseDir, file));
 
   if (!pakage) {
     pakage = name
@@ -103,29 +103,6 @@ module.exports = function importGlobMetaPlugin(babel) {
           )
           return
         }
-
-        // Ignore the current file itself
-        const removeCurrent = item => {
-          return item != currentFilePath
-        }
-
-        // Assume index.js if there's no trailing filename in the pattern
-        const onlyIndex = item => {
-          let isMainImport = importPath[importPath.length - 1] === "*";
-          let isIndex = Path.basename(item) == "index.js";
-          if (isMainImport) {
-            return isIndex
-          } else {
-            return true
-          }
-        }
-
-        const noDeepSearch = item => {
-          let depth = Path.relative(baseDir, item).split(Path.sep).length;
-          return depth == 2
-        }
-
-        files = files.filter(removeCurrent).filter(onlyIndex).filter(noDeepSearch);
 
         // Compute relative paths
         files = files.map(file => {

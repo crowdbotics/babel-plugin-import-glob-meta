@@ -1,1 +1,1 @@
-import modules from "./**/missingfile.js";
+import modules from "./*/missingfile.js";

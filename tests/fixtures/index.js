@@ -1,2 +1,2 @@
-import modules from "./**";
-import options from "./**/options.js";
+import modules from "./*/index.js";
+import options from "./*/options.js";

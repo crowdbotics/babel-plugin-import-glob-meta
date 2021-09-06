@@ -1,1 +1,1 @@
-import { modules } from "./**";
+import { modules } from "./*";
