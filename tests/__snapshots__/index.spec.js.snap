@@ -29,4 +29,33 @@ let options = [{
 }];"
 `;
 
+exports[`gracefully resolves package names when fs isn't available (i.e. in a browser) 1`] = `
+"import _ig from \\"./module-B/index.js\\";
+import _ig2 from \\"./moduleA/index.js\\";
+let modules = [{
+  \\"name\\": \\"moduleB\\",
+  \\"value\\": _ig,
+  \\"path\\": \\"./module-B/index.js\\",
+  \\"package\\": \\"@fixtures/module-B\\"
+}, {
+  \\"name\\": \\"moduleA\\",
+  \\"value\\": _ig2,
+  \\"path\\": \\"./moduleA/index.js\\",
+  \\"package\\": \\"@fixtures/moduleA\\"
+}];
+import _ig3 from \\"./module-B/options.js\\";
+import _ig4 from \\"./moduleA/options.js\\";
+let options = [{
+  \\"name\\": \\"moduleB\\",
+  \\"value\\": _ig3,
+  \\"path\\": \\"./module-B/options.js\\",
+  \\"package\\": \\"@fixtures/module-B\\"
+}, {
+  \\"name\\": \\"moduleA\\",
+  \\"value\\": _ig4,
+  \\"path\\": \\"./moduleA/options.js\\",
+  \\"package\\": \\"@fixtures/moduleA\\"
+}];"
+`;
+
 exports[`returns empty array on zero matches 1`] = `"let modules = [];"`;
